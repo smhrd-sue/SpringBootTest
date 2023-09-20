@@ -44,7 +44,8 @@ public class PlayerService {
 			// 1. 파일이름 -> 실제 파일 -> byte문자열
 			// 1-1. 파일이름 (p.getImgSrc())
 			// classpath : src/main/resoucrces 경로를 잡아주는 문자열
-			String filePath = "classpath:/static/player_img/" + p.getImgSrc();
+			//String filePath = "classpath:/static/player_img/" + p.getImgSrc();
+			String filePath = "static/player_img/" + p.getImgSrc();
 			System.out.println(filePath);
 
 			// 1-2. 실제 파일로 불러오기
