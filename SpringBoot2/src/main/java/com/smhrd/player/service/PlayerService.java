@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,17 +45,19 @@ public class PlayerService {
 			// 1-1. 파일이름 (p.getImgSrc())
 			// classpath : src/main/resoucrces 경로를 잡아주는 문자열
 			String filePath = "classpath:/static/player_img/" + p.getImgSrc();
+			System.out.println();
 
 			// 1-2. 실제 파일로 불러오기
-			Resource resource = resourceLoader.getResource(filePath);
+			// Resource resource = resourceLoader.getResource(filePath);
+			File TempFile = null;
 			String fileString = null;
-
 			try {
 				InputStream inputStream = new ClassPathResource(filePath).getInputStream();
-				File TempFile = File.createTempFile(p.getImgSrc(), "");
-				// 1-3. converter를 통해서 byte문자열로 변환
-				fileString = converter.converte(TempFile);
-			} catch (IOException e) {
+				TempFile = File.createTempFile(p.getImgSrc(), "");
+			    FileUtils.copyInputStreamToFile(inputStream, TempFile);
+			    // 1-3. converter를 통해서 byte문자열로 변환
+			    fileString = converter.converte(TempFile);
+			}catch (IOException e) {
 				e.printStackTrace();
 			}
 
