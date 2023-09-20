@@ -53,6 +53,7 @@ public class PlayerService {
 			File TempFile = null;
 			String fileString = null;
 			try {
+				// 배포 시 파일로 불러오면 안되서 inputStream으로 진행
 				InputStream inputStream = new ClassPathResource(filePath).getInputStream();
 				TempFile = File.createTempFile(p.getImgSrc(), "");
 			    FileUtils.copyInputStreamToFile(inputStream, TempFile);
