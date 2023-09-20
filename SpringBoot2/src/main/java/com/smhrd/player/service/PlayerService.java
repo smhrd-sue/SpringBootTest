@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -49,8 +50,10 @@ public class PlayerService {
 			String fileString = null;
 
 			try {
+				InputStream inputStream = new ClassPathResource(filePath).getInputStream();
+				File TempFile = File.createTempFile(p.getImgSrc(), "");
 				// 1-3. converter를 통해서 byte문자열로 변환
-				fileString = converter.converte(resource.getFile());
+				fileString = converter.converte(TempFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
